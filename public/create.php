@@ -1,7 +1,8 @@
 <?php
+require "../config.php";
+require "../common.php";
 if(isset($_POST["submit"])){
-	require "../config.php";
-	require "../common.php";
+	if (!hash_equals($_SESSION['csrf'], $_POST['csrf'])) die();
 	try{
 		$connection = new PDO($dsn, $username, $password, $options);
 
@@ -36,7 +37,7 @@ if(isset($_POST["submit"])){
 
 <?php if (isset($_POST['submit']) && $statement) { ?>
     <blockquote><?php echo $_POST['firstname']; ?> successfully added.</blockquote>
-<?php } ?>
+<?php }?>
 <h2>Add a user</h2>
 
 <form method="POST"> 	
@@ -51,6 +52,8 @@ if(isset($_POST["submit"])){
 	<label for="location">Location</label> 	
 	<input type="text" name="location" id="location"> 	
 	<input type="submit" name="submit" value="Submit"> 
+
+	<input name="csrf" type="hidden" value="<?php echo escape($_SESSION['csrf']); ?>">
 </form> 
 <a href="index.php">Back to homepage</a>
 
