@@ -14,12 +14,10 @@ try{
 }
 ?>
 
-
-
 <div class="container mt-5">
     <div class="row">
         <?php foreach ($result as $row) : ?>
-        <div class="col-sm mt-5">
+        <div class="col-sm-3 mt-5">
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">
@@ -32,7 +30,7 @@ try{
                         Mobile Number: <?php echo escape($row["mobile_number"]); ?><br>
                         Home Number: <?php echo escape($row["home_number"]); ?> <br>
                     </p>
-                    <a href="#" class="card-link btn btn-danger">
+                    <a href="../public/?delete_id=<?php echo escape($row["id"]); ?>" class="card-link btn btn-danger">
                         <i class="far fa-trash-alt"></i>
                         <span style="padding-left:2px;">Delete</span>
                     </a>
